@@ -45,7 +45,7 @@ class Odometer extends React.Component {
     render() {
         return (
             <>
-            <h2>Odemeter: {this.state.mileage.toString().padStart(4, "0")}</h2>
+            <h2>Odometer: {this.state.mileage.toString().padStart(4, "0")}</h2>
             <button onClick={() => this.addMileage(1)}>+1</button>
             <button onClick={() => this.addMileage(10)}>+10</button>
             <button onClick={() => this.addMileage(100)}>+100</button>
