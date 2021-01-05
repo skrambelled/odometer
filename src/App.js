@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
         <Header text="This is an odometer!"/>
-        <Odometer />
+        <Odometer digits="4"/>
         <Footer trademark="Mark Bell"/>
     </div>
   );
@@ -38,18 +38,21 @@ class Odometer extends React.Component {
 
     addMileage(additionalMiles) {
         this.setState({
-            mileage : (this.state.mileage + additionalMiles) % 10000
+            mileage : (this.state.mileage + additionalMiles) % (10 ** this.props.digits)
         });
     }
 
     render() {
+
+        const buttons = []
+        for(let i = 0; i < this.props.digits; i++) {
+            buttons.push(<button onClick={() => this.addMileage(10 ** i)}>+{10**i}</button>)
+        }
+
         return (
             <>
-            <h2>Odometer: {this.state.mileage.toString().padStart(4, "0")}</h2>
-            <button onClick={() => this.addMileage(1)}>+1</button>
-            <button onClick={() => this.addMileage(10)}>+10</button>
-            <button onClick={() => this.addMileage(100)}>+100</button>
-            <button onClick={() => this.addMileage(1000)}>+1000</button>
+            <h2>Odmeter: {this.state.mileage.toString().padStart(this.props.digits, "0")}</h2>
+            {buttons}
             </>
         );
     }
